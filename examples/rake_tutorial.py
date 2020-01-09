@@ -11,7 +11,7 @@ import io
 stoppath = "data/stoplists/SmartStoplist.txt"
 
 # 1. initialize RAKE by providing a path to a stopwords file
-rake_object = Rake(stoppath, 5, 3, 4)
+rake_object = RakeV1(stoppath, 5, 3, 4)
 
 # 2. run on RAKE on a given text
 sample_file = io.open("data/docs/fao_test/w2167e.txt", 'r',encoding="iso-8859-1")
@@ -26,7 +26,7 @@ print("----------")
 # EXAMPLE TWO - BEHIND THE SCENES (from https://github.com/aneesha/RAKE/rake.py)
 
 # 1. initialize RAKE by providing a path to a stopwords file
-rake_object = Rake(stoppath)
+rake_object = RakeV1(stoppath)
 
 text = "Compatibility of systems of linear constraints over the set of natural numbers. Criteria of compatibility " \
        "of a system of linear Diophantine equations, strict inequations, and nonstrict inequations are considered. " \
