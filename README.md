@@ -2,8 +2,7 @@
 
 [![Django](https://img.shields.io/badge/Django-2.2.3-green.svg)](https://www.djangoproject.com/weblog/2019/jul/01/security-releases/)
 [![Python 3.7.3](https://img.shields.io/badge/python-3.7.3-green.svg)](https://www.python.org/)
-[![Build Status](https://travis-ci.org/JV-conseil-Internet-Consulting/rake-nlp.svg?branch=master)](https://travis-ci.org/JV-conseil-Internet-Consulting/rake-nlp)
-[![Coverage Status](https://coveralls.io/repos/github/JV-conseil-Internet-Consulting/rake-nlp/badge.svg?branch=master)](https://coveralls.io/github/JV-conseil-Internet-Consulting/rake-nlp?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/JV-conseil-Internet-Consulting/rake-nlp/badge.svg)](https://coveralls.io/github/JV-conseil-Internet-Consulting/rake-nlp)
 [![License BSD 3-Clause](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](LICENSE)
 [![Thanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/JV-conseil-Internet-Consulting)
 [![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=P3DGL6EANDY96&source=url)
