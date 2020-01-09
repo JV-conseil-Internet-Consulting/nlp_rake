@@ -3,7 +3,7 @@ from __future__ import print_function
 from six.moves import range
 __author__ = 'a_medelyan'
 import test_data
-import rake
+from rake_nlp import Rake
 import sys
 
 # reading a directory with test documents
@@ -20,7 +20,7 @@ for min_char_length in range(3,8):
     for max_words_length in range(3,6):
         for min_keyword_frequency in range(1,7):
 
-            rake_object = rake.Rake("SmartStoplist.txt", min_char_length, max_words_length, min_keyword_frequency)
+            rake_object = Rake("SmartStoplist.txt", min_char_length, max_words_length, min_keyword_frequency)
             total_fmeasure = 0
             for test_doc in test_set.values():
                 keywords = rake_object.run(test_doc.text)

@@ -241,6 +241,35 @@ def generate_candidate_keyword_scores(phrase_list, word_score, min_keyword_frequ
 
 
 class Rake(object):
+    def __init__(self, stop_words_list, min_char_length=1, max_words_length=5, min_keyword_frequency=1,
+                 min_words_length_adj=1, max_words_length_adj=1, min_phrase_freq_adj=2):
+        self.__stop_words_list = stop_words_list
+        self.__min_char_length = min_char_length
+        self.__max_words_length = max_words_length
+        self.__min_keyword_frequency = min_keyword_frequency
+        self.__min_words_length_adj = min_words_length_adj
+        self.__max_words_length_adj = max_words_length_adj
+        self.__min_phrase_freq_adj = min_phrase_freq_adj
+
+    def run(self, text):
+        sentence_list = split_sentences(text)
+
+        stop_words_pattern = build_stop_word_regex(self.__stop_words_list)
+
+        phrase_list = generate_candidate_keywords(sentence_list, stop_words_pattern, self.__stop_words_list,
+                                                  self.__min_char_length, self.__max_words_length,
+                                                  self.__min_words_length_adj, self.__max_words_length_adj,
+                                                  self.__min_phrase_freq_adj)
+
+        word_scores = calculate_word_scores(phrase_list)
+
+        keyword_candidates = generate_candidate_keyword_scores(phrase_list, word_scores, self.__min_keyword_frequency)
+
+        sorted_keywords = sorted(six.iteritems(keyword_candidates), key=operator.itemgetter(1), reverse=True)
+        return sorted_keywords
+
+
+class RakeV1(object):
     def __init__(self, stop_words_path, min_char_length=1, max_words_length=5, min_keyword_frequency=1,
                  min_words_length_adj=1, max_words_length_adj=1, min_phrase_freq_adj=2):
         self.__stop_words_path = stop_words_path

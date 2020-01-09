@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 __author__ = 'a_medelyan'
-import rake
+from rake_nlp import Rake
 
 # EXAMPLE: Extracting single words from a French text
 
@@ -9,7 +9,7 @@ import rake
 stoppath = "FrenchStoplist.txt"
 
 # 1. initialize RAKE by providing a path to a stopwords file and setting phrase length in words to 1
-rake_object = rake.Rake(stoppath, 5, 1, 4)
+rake_object = Rake(stoppath, 5, 1, 4)
 
 # 2. run on RAKE on a given text
 sample_file = open("data/docs/french/frwikinews-test-1000.txt", 'r')
