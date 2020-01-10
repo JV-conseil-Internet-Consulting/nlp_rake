@@ -7,7 +7,7 @@
 __title__ = "rake-nlp"
 __description__ = "Python implementation of the Rapid Automatic Keyword Extraction (RAKE) algorithm"
 __url__ = "https://github.com/JV-conseil-Internet-Consulting/rake-nlp"
-__version__ = "1.0.4"
+__version__ = "1.0.5"
 __author__ = "JV conseil – Internet Consulting"
 __author_email__ = "contact@jv-conseil.net"
 __license__ = "BSD 3-Clause License"
