@@ -266,7 +266,11 @@ class Rake(object):
         keyword_candidates = generate_candidate_keyword_scores(phrase_list, word_scores, self.__min_keyword_frequency)
 
         sorted_keywords = sorted(six.iteritems(keyword_candidates), key=operator.itemgetter(1), reverse=True)
-        return sorted_keywords
+
+        #
+        # return sorted_keywords
+        #
+        return [(k[1], k[0]) for k in sorted_keywords]
 
 
 class RakeV1(object):
