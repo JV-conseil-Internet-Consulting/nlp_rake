@@ -1,7 +1,3 @@
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-
 #
 # stop word list from SMART (Salton,1971).  Available at ftp://ftp.cs.cornell.edu/pub/smart/english.stop
 #
@@ -10,25 +6,34 @@ stoplist = ["a", "a's", "able", "about", "above", "according", "accordingly", "a
 text = "Background and aims. The ATP-binding cassette (ABC) transporter family transports various molecules across the enterocytes in the gut protecting the intestine against potentially harmful substances. Moreover, ABC transporters are involved in mucosal immune defence through interaction with cytokines. The study aimed to assess whether polymorphisms in ABCB1, ABCC2 and ABCG2 were associated with risk of colorectal cancer (CRC) and to investigate gene-environment (dietary factors, smoking and use of non-steroidal anti-inflammatory drugs) and gene-gene interactions between previously studied polymorphisms in IL1B and IL10 and ABC transporter genes in relation to CRC risk. Materials and methods. We used a Danish prospective case-cohort study of 1010 CRC cases and 1829 randomly selected participants from the Danish Diet, Cancer and Health cohort. Incidence rate ratios were calculated based on Cox proportional hazards model. Results. None of the polymorphisms were associated with CRC, but ABCB1 and ABCG2 haplotypes were associated with risk of CRC. ABCB1/rs1045642 interacted with intake of cereals and fiber (p-Value for interaction (Pint) = 0.001 and 0.01, respectively). In a three-way analysis, both ABCB1/rs1045642 and ABCG2/rs2231137 in combination with IL10/rs3024505 interacted with fiber intake in relation to risk of CRC (Pint = 0.0007 and 0.009). Conclusions. Our results suggest that the ABC transporters P-glycoprotein/multidrug resistance 1 and BRCP, in cooperation with IL-10, are involved in the biological mechanism underlying the protective effect of fiber intake in relation to CRC. These results should be replicated in other cohorts to rule out chance findings. © 2015 Informa Healthcare. Background: The etiology of the inflammatory bowel diseases, including ulcerative colitis (UC), remains incompletely explained. We hypothesized that an analysis of the UC colon proteome could reveal novel insights into the disease etiology. Methods: Mucosal colon biopsies were taken by endoscopy from noninflamed tissue of 10 patients with UC and 10 controls. The biopsies were either snap-frozen for protein analysis or prepared for histology. The protein content of the biopsies was characterized by high-throughput gel-free quantitative proteomics, and biopsy histology was analyzed by light microscopy and confocal microscopy. Results: We identified and quantified 5711 different proteins with proteomics. The abundance of the proteins calprotectin and lactotransferrin in the tissue correlated with the degree of tissue inflammation as determined by histology. However, fecal calprotectin did not correlate. Forty-six proteins were measured with a statistically significant differences in abundances between the UC colon tissue and controls. Eleven of the proteins with increased abundances in the UC biopsies were associated with neutrophils and neutrophil extracellular traps. The findings were validated by microscopy, where an increased abundance of neutrophils and the presence of neutrophil extracellular traps by extracellular DNA present in the UC colon tissue were confirmed. Conclusions: Neutrophils, induced neutrophil extracellular traps, and several proteins that play a part in innate immunity are all increased in abundance in the morphologically normal colon mucosa from patients with UC."
 
 
-vectorizer = TfidfVectorizer()
-vectors = vectorizer.fit_transform([text])
-#print("Keywords:", vectors)
-feature_names = vectorizer.get_feature_names()
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-print("feature_names:", feature_names)
-dense = vectors.todense()
-denselist = dense.tolist()
-print("denselist:", denselist)
-df = pd.DataFrame(denselist, columns=feature_names)
+# Two sets of documents
+# plays_corpus contains all documents in your corpus *including Romeo and Juliet*
+plays_corpus = ['This is Romeo and Juliet','this is another play','and another','and one more']
 
-# 3. print results
-print("pd.DataFrame:", df)
+#romeo is a list that contains *just* the text for Romeo and Juliet
+romeo = [plays_corpus[0]] # must be in a list even if only one object
 
+# Initialise your TFIDF Vectorizer object
+#tfidf_vectorizer = TfidfVectorizer()
+v = TfidfVectorizer(stop_words=stoplist)
 
-keyword_tuples = list(zip(denselist[0], feature_names))
-keyword_tuples = sorted(set(keyword_tuples))[::-1]
+# Now create a model by fitting the vectorizer to your main plays corpus, this creates an array of TFIDF scores
+#model = tfidf_vectorizer.fit_transform(plays_corpus)
+model = v.fit_transform([text])
 
-# 3. print results
-print("Keywords:", keyword_tuples)
+#romeo_scored = tfidf_vectorizer.transform(romeo) # note - .fit() not .fit_transform
+doc = v.transform([text])
 
+#terms = tfidf_vectorizer.get_feature_names()
+terms = v.get_feature_names()
 
+#scores = romeo_scored.toarray().flatten().tolist()
+scores = doc.toarray().flatten().tolist()
+
+data = list(zip(scores, terms))
+
+sorted_data = sorted(data,key=lambda x: x[0],reverse=True)
+
+print(sorted_data)
